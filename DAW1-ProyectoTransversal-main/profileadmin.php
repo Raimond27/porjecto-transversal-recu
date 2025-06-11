@@ -4,7 +4,7 @@ session_start();
 // Conexión a la base de datos para obtener la imagen
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $dbname = "spmotors";
 
 try {
