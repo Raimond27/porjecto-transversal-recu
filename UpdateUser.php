@@ -113,21 +113,21 @@
 
         <form action="php/usercontroller.php" method="POST">
             <div class="form-group">
-                <label for="current_password">Contraseña Actual:</label>
+                <label for="current_password">CONTRASEÑA ACTUAL:</label>
                 <input type="password" id="current_password" name="current_password" required>
             </div>
 
             <div class="form-group">
-                <label for="new_password">Nueva Contraseña:</label>
+                <label for="new_password">NEW PASSWORD:</label>
                 <input type="password" id="new_password" name="new_password" required>
             </div>
 
             <div class="form-group">
-                <label for="confirm_password">Confirmar Nueva Contraseña:</label>
+                <label for="confirm_password">CONFIRMAR CONTRASEÑA:</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
 
-            <button type="submit" name="update_password">Actualizar Contraseña</button>
+            <button type="submit" name="update_password">ACTUALIZAR CONTRASEÑA</button>
         </form>
 
         <a href="<?php echo ($_SESSION['rol'] === 'admin') ? 'profileadmin.php' : 'profileuser.php'; ?>"

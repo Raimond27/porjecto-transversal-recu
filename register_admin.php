@@ -15,6 +15,7 @@
         <label for="email">Correo electrónico:</label><br>
         <input type="email" id="email" name="email" required><br><br>
         
+        
         <label for="password">Contraseña:</label><br>
         <input type="password" id="password" name="password" required><br><br>
         

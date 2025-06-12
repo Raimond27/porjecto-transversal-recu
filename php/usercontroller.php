@@ -329,13 +329,13 @@ class usercontroller
 
         // Validaciones básicas
         if (empty($passwordActual) || empty($nuevaPassword) || empty($confirmarPassword)) {
-            $_SESSION['error_message'] = "Todos los campos son obligatorios.";
+            $_SESSION['error_message'] = "TODOS LOS CAMPOS SON OBLIGATORIOS.";
             header("Location: ../error.php");
             exit;
         }
 
         if ($nuevaPassword !== $confirmarPassword) {
-            $_SESSION['error_message'] = "Las nuevas contraseñas no coinciden.";
+            $_SESSION['error_message'] = "LA NUEVA CONTRASEÑA NO COINCIDE.";
             header("Location: ../error.php");
             exit;
         }
@@ -348,7 +348,7 @@ class usercontroller
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$resultado || !password_verify($passwordActual, $resultado['password'])) {
-                $_SESSION['error_message'] = "La contraseña actual es incorrecta.";
+                $_SESSION['error_message'] = "LA CONTRASEÑA ES INCORRECTA.";
                 header("Location: ../error.php");
                 exit;
             }
@@ -360,7 +360,7 @@ class usercontroller
             $updateStmt->bindParam(":usuario", $usuario);
             $updateStmt->execute();
 
-            $_SESSION['success_message'] = "Contraseña actualizada correctamente.";
+            $_SESSION['success_message'] = "LA CONTRASEÑA HA SIDO ACTUALIZADA CORRECTAMENTE.";
             header("Location: ../profileuser.php");
             exit;
         } catch (PDOException $e) {
