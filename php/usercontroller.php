@@ -114,12 +114,13 @@ class usercontroller
         }
 
         try {
-            $stmt = $this->conn->prepare("INSERT INTO users (usuario, email, password, rol, foto)
-                                      VALUES (:usuario, :email, :password, :rol, :foto)");
+            $stmt = $this->conn->prepare("INSERT INTO users (usuario, email, password, rol, foto,number)
+                                      VALUES (:usuario, :email, :password, :rol, :foto,:number)");
 
             $stmt->bindParam(":usuario", $usuario);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":number, $number");
             $stmt->bindParam(":rol", $rol);
             $stmt->bindParam(":foto", $foto, PDO::PARAM_LOB);
 
@@ -170,6 +171,10 @@ class usercontroller
             $stmt->bindParam(":email", $email);
             $stmt->execute();
 
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE number = :number");
+            $stmt->bindParam(":number", $number);
+            $stmt->execute();
+
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$user || !password_verify($password, $user["password"])) {
@@ -182,6 +187,7 @@ class usercontroller
             $_SESSION["logged"] = true;
             $_SESSION["email"] = $user["email"];
             $_SESSION["username"] = $user["usuario"];
+            $_SESSION["number"] = $user["number"];
             $_SESSION["rol"] = $user["rol"];
             $_SESSION["profile_image"] = $user["foto"] ?? null;
 
