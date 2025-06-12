@@ -72,6 +72,7 @@ class usercontroller
             usuario VARCHAR(50) NOT NULL UNIQUE,
             email VARCHAR(100) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
+            number int(20)NOT NULL,
             rol VARCHAR(20) NOT NULL,
             foto LONGBLOB
         )";
@@ -91,6 +92,7 @@ class usercontroller
         $usuario = trim($_POST["username"] ?? '');
         $email = trim($_POST["email"] ?? '');
         $passwordRaw = $_POST["password"] ?? '';
+        $number =trim($_POST["number"] ?? '');
         $foto = null;
 
         // Validaciones básicas
@@ -105,7 +107,8 @@ class usercontroller
             header("Location: ../error.php");
             exit;
         }
-
+        
+       
         $password = password_hash($passwordRaw, PASSWORD_DEFAULT);
 
         // Solo admins pueden subir imagen
@@ -120,7 +123,7 @@ class usercontroller
             $stmt->bindParam(":usuario", $usuario);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":password", $password);
-            $stmt->bindParam(":number, $number");
+            $stmt->bindParam(":number", $number);
             $stmt->bindParam(":rol", $rol);
             $stmt->bindParam(":foto", $foto, PDO::PARAM_LOB);
 
@@ -130,6 +133,7 @@ class usercontroller
             $_SESSION['username'] = $usuario;
             $_SESSION['email'] = $email;
             $_SESSION['rol'] = $rol;
+            $_SESSION['number']=$number;
 
             // Redirigir según el rol
             $redirect = ($rol === "admin") ? "../profileadmin.php" : "../profileuser.php";
@@ -276,7 +280,7 @@ class usercontroller
         $nuevoUsuario = trim($_POST["new_username"] ?? '');
         $nuevoEmail = trim($_POST["new_email"] ?? '');
         $usuarioActual = $_SESSION['username'];
-
+        
         // Validaciones básicas
         if (empty($nuevoUsuario) || empty($nuevoEmail)) {
             $_SESSION['error_message'] = "Todos los campos son obligatorios.";

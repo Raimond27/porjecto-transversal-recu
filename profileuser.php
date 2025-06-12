@@ -14,7 +14,7 @@ session_start();
     <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
     <p>correo: <?php echo $_SESSION['email']; ?></p>
     <p>Rol: <?php echo $_SESSION['rol']; ?></p>
-     <h1>number phone: <?php echo $_SESSION['number']; ?>!</h1>
+    <p>number phone: <?php echo $_SESSION['number']; ?></p>
 
     <form action="php/usercontroller.php" method="POST">
         <button type="submit" name="logout" class="button">Cerrar Sesión</button>
